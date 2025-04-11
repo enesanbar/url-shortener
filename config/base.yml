@@ -1,0 +1,45 @@
+---
+debug: false
+server:
+  port: 9090
+  context-path: /url-shortener
+  healthcheck-path: /_hc
+
+default-redirect: https://www.google.com
+
+cache:
+  inmemory:
+    default-expiration: 1
+    cleanup-interval: 30
+
+usecases:
+  redirect:
+    retrier:
+      wait-interval: 1000
+      retry-count: 2
+
+datasources:
+  mongo:
+    default:
+      host: localhost:27017
+      auth_db: admin
+      username: root
+      password: password
+      name: url-shortener
+      timeout: 5
+      min-pool-size: 10
+      max-pool-size: 10
+      max-conn-idle-time: 10
+
+  # rabbitmq:
+  #   my-connection-1:
+  #     host: localhost
+  #     port: "5672"
+  #     username: guest
+  #     password: guest
+    # my-connection-2:
+    #   host: localhost
+    #   port: "5672"
+    #   username: guest
+    #   password: guest
+  

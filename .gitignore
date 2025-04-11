@@ -1,0 +1,52 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+.idea
+.cache
+
+# dependencies
+.go
+node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+coverage.*
+cobertura.*
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Go template
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+/url-shortener
+coverage.*
+test-report.*
+linter-report.xml
+
+# python
+**/*.pyc
+**/*.csv
+**/*.xml

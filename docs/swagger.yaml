@@ -1,0 +1,236 @@
+basePath: /url-shortener/api
+consumes:
+- application/json
+definitions:
+  create.Request:
+    properties:
+      code:
+        example: ZSDASZX
+        maxLength: 15
+        minLength: 2
+        type: string
+      expires_at:
+        example: "2006-01-02 15:04:05"
+        type: string
+      url:
+        example: https://example.com
+        type: string
+    required:
+    - url
+    type: object
+  response.Response:
+    properties:
+      code:
+        example: ZSDASZX
+        type: string
+      created_at:
+        example: "2021-10-27T14:13:39.306Z"
+        type: string
+      expires_at:
+        example: "2021-10-27T14:13:39Z"
+        type: string
+      id:
+        type: string
+      updated_at:
+        example: "2021-10-27T14:13:39.306Z"
+        type: string
+      url:
+        example: https://example.com
+        type: string
+    type: object
+  router.ApiResponse:
+    properties:
+      data: {}
+      error:
+        type: string
+      status:
+        type: integer
+    type: object
+  router.PagedResponse:
+    properties:
+      current_page:
+        type: integer
+      items: {}
+      next_page:
+        type: integer
+      num_of_pages:
+        type: integer
+      page_size:
+        type: integer
+      prev_page:
+        type: integer
+      total_items:
+        type: integer
+    type: object
+  update.Request:
+    properties:
+      code:
+        example: ZSDASZX
+        type: string
+      expires_at:
+        example: "2006-01-02 15:04:05"
+        type: string
+      url:
+        example: https://example.com
+        type: string
+    required:
+    - url
+    type: object
+info:
+  contact: {}
+  description: This is a simple URL shortener API
+  termsOfService: http://swagger.io/terms/
+  title: URL Shortener API
+  version: "1.0"
+paths:
+  /mappings:
+    get:
+      description: Get all URL mappings
+      parameters:
+      - default: 1
+        description: Page Number
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      - default: 16
+        description: Page Size
+        in: query
+        maximum: 64
+        minimum: 1
+        name: pageSize
+        type: integer
+      - default: desc
+        description: Sort Order
+        enum:
+        - asc
+        - desc
+        in: query
+        name: sortOrder
+        type: string
+      - description: Sort Field
+        in: query
+        name: sortBy
+        type: string
+      - description: Search By Code
+        in: query
+        name: codeQuery
+        type: string
+      - description: Search By URL
+        in: query
+        name: urlQuery
+        type: string
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/router.ApiResponse'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/router.PagedResponse'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/response.Response'
+                        type: array
+                    type: object
+              type: object
+      summary: Get URL Mappings
+      tags:
+      - mappings
+    post:
+      description: If 'code' parameter is not supplied, one will be generated
+      parameters:
+      - description: Mapping Request
+        in: body
+        name: mapping
+        required: true
+        schema:
+          $ref: '#/definitions/create.Request'
+      responses:
+        "201":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/router.ApiResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.Response'
+              type: object
+      summary: Create or Generate URL Mapping
+      tags:
+      - mappings
+  /mappings/{code}:
+    delete:
+      description: Deletes an existing mapping
+      parameters:
+      - description: Short Code
+        in: path
+        name: code
+        required: true
+        type: string
+      responses:
+        "204":
+          description: "\t\tdesc"
+          schema:
+            type: string
+      summary: Deletes an existing mapping
+      tags:
+      - mappings
+    get:
+      description: Get a single URL mapping
+      parameters:
+      - description: Short Code
+        in: path
+        name: code
+        required: true
+        type: string
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/router.ApiResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.Response'
+              type: object
+        "404":
+          description: desc
+          schema:
+            $ref: '#/definitions/router.ApiResponse'
+      summary: Get URL Mapping
+      tags:
+      - mappings
+    patch:
+      description: Update existing URL Mapping
+      parameters:
+      - description: Short Code
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: Update Request
+        in: body
+        name: mapping
+        required: true
+        schema:
+          $ref: '#/definitions/update.Request'
+      responses:
+        "202":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/router.ApiResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.Response'
+              type: object
+      summary: Update existing URL Mapping
+      tags:
+      - mappings
+produces:
+- application/json
+swagger: "2.0"

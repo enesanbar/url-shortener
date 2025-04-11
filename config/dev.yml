@@ -1,0 +1,14 @@
+---
+env: prod
+datasources:
+  mongo:
+    default:
+      host: localhost:27017
+      auth_db: admin
+      username: root
+      password: password
+      name: url-shortener
+      timeout: 5
+      min-pool-size: 10
+      max-pool-size: 10
+      max-conn-idle-time: 10
