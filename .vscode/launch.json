@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run (Prod)",
+            "name": "Run REST Server (Prod)",
             "type": "go",
             "request": "launch",
             "mode": "auto",
@@ -10,7 +10,26 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "DEPLOY_TYPE": "prod",
-                "ENV_PREFIX": "NC",
+                "ENV_PREFIX": "MYAPP",
+                "OTEL_EXPORTER": "otlp",
+                // "MYAPP_DATASOURCES_RABBITMQ_CONNECTIONS_DEFAULT_PASSWORD": "CHANGED-BY-ENV",
+            },
+            "buildFlags": [
+                "-race"
+            ]
+        },
+        {
+            "name": "Run GRPC Server (Prod)",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/grpc/main.go",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "DEPLOY_TYPE": "prod",
+                "ENV_PREFIX": "MYAPP",
+                "OTEL_EXPORTER": "otlp",
+                // "MYAPP_DATASOURCES_RABBITMQ_CONNECTIONS_DEFAULT_PASSWORD": "CHANGED-BY-ENV",
             },
             "buildFlags": [
                 "-race"
