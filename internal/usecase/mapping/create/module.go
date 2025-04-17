@@ -9,5 +9,12 @@ var Module = fx.Options(
 )
 
 var factories = fx.Provide(
-	NewCreateMappingInteractor,
+	fx.Annotated{
+		Name:   "interactor",
+		Target: NewCreateMappingInteractor,
+	},
+	fx.Annotated{
+		Name:   "producer",
+		Target: NewCreateMappingInteractorProducer,
+	},
 )

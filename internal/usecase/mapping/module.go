@@ -2,7 +2,7 @@ package mapping
 
 import (
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/create"
-	"github.com/enesanbar/url-shortener/internal/usecase/mapping/delete"
+	"github.com/enesanbar/url-shortener/internal/usecase/mapping/deletion"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/get"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/getall"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/response"
@@ -15,6 +15,6 @@ var Module = fx.Options(
 	get.Module,
 	getall.Module,
 	update.Module,
-	delete.Module,
+	deletion.Module,
 	response.Module,
 )

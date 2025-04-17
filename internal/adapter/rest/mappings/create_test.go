@@ -141,7 +141,13 @@ func TestCreateUrl(t *testing.T) {
 			c.SetRequest(c.Request().WithContext(subCtx))
 
 			// build handler
-			handler := NewCreateMappingAdapter(router.NewBaseHandler(logger), scenario.inModelMock(), response.NewMappingPresenter(), logger)
+			params := CreateMappingAdapterParams{
+				BaseHandler: router.NewBaseHandler(logger),
+				Presenter:   response.NewMappingPresenter(),
+				Logger:      logger,
+				Interactor:  scenario.inModelMock(),
+			}
+			handler := NewCreateMappingAdapter(params)
 			err := handler.Handle(c)
 
 			if assert.NoError(t, err) {

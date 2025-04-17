@@ -34,7 +34,7 @@ type GetMappingAdapterParams struct {
 
 	BaseHandler router.BaseHandler
 	Presenter   response.Presenter
-	Interactor  get.Service `name:"interactor"`
+	Interactor  get.Service `name:"cache"`
 }
 
 func NewGetMappingAdapter(p GetMappingAdapterParams) *GetMappingAdapter {

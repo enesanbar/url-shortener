@@ -11,13 +11,11 @@ import (
 	"github.com/enesanbar/go-service/errors"
 	"github.com/enesanbar/go-service/log"
 	"github.com/enesanbar/go-service/validation"
-	"github.com/enesanbar/url-shortener/internal/usecase/mapping/response"
 )
 
 type Interactor struct {
 	logger    log.Factory
 	repo      Repository
-	presenter response.Presenter
 	validator validation.Validator
 }
 
@@ -26,16 +24,14 @@ type Params struct {
 
 	Logger    log.Factory
 	Repo      Repository
-	Presenter response.Presenter
 	Validator validation.Validator `name:"go_playground"`
 }
 
 // NewUpdateMappingInteractor creates new Interactor with its dependencies
-func NewUpdateMappingInteractor(p Params) *Interactor {
+func NewUpdateMappingInteractor(p Params) Service {
 	return &Interactor{
 		logger:    p.Logger,
 		repo:      p.Repo,
-		presenter: p.Presenter,
 		validator: p.Validator,
 	}
 }

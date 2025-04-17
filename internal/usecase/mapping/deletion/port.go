@@ -1,4 +1,4 @@
-package delete
+package deletion
 
 import (
 	"context"

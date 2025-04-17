@@ -34,7 +34,7 @@ type UpdateMappingAdapterParams struct {
 	fx.In
 
 	BaseHandler          router.BaseHandler
-	UpdateMappingUseCase UpdateMappingUseCase
+	UpdateMappingUseCase update.Service `name:"producer"`
 	Presenter            response.Presenter
 	Logger               log.Factory
 }

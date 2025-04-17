@@ -8,6 +8,7 @@ import (
 	"github.com/enesanbar/go-service/log"
 	"github.com/enesanbar/go-service/router"
 	"github.com/labstack/echo/v4"
+	"go.uber.org/fx"
 
 	"github.com/enesanbar/url-shortener/internal/domain"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/create"
@@ -28,21 +29,26 @@ type CreateMappingAdapter struct {
 	logger    log.Factory
 }
 
-func NewCreateMappingAdapter(
-	baseHandler router.BaseHandler,
-	c CreateMappingUseCase,
-	presenter response.Presenter,
-	l log.Factory,
-) *CreateMappingAdapter {
+type CreateMappingAdapterParams struct {
+	fx.In
+
+	BaseHandler router.BaseHandler
+	Presenter   response.Presenter
+	Logger      log.Factory
+	Interactor  create.Service `name:"producer"`
+}
+
+func NewCreateMappingAdapter(p CreateMappingAdapterParams) *CreateMappingAdapter {
 	return &CreateMappingAdapter{
-		BaseHandler: baseHandler,
-		creator:     c,
-		presenter:   presenter,
-		logger:      l,
+		BaseHandler: p.BaseHandler,
+		creator:     p.Interactor,
+		presenter:   p.Presenter,
+		logger:      p.Logger,
 	}
 }
 
 // Handle godoc
+//
 //	@Summary		Create or Generate URL Mapping
 //	@Description	If 'code' parameter is not supplied, one will be generated
 //	@Tags			mappings

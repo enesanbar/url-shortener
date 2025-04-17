@@ -31,15 +31,48 @@ datasources:
       max-pool-size: 10
       max-conn-idle-time: 10
 
-  # rabbitmq:
-  #   my-connection-1:
-  #     host: localhost
-  #     port: "5672"
-  #     username: guest
-  #     password: guest
-    # my-connection-2:
-    #   host: localhost
-    #   port: "5672"
-    #   username: guest
-    #   password: guest
-  
+  rabbitmq:
+    connections:
+      default:
+        # host: localhost
+        # port: "5672"
+        username: guest
+        password: guest
+    
+    channels:
+      default:
+        connection: default
+        mandatory: false
+        immediate: false
+
+    # automatically create the exchange and queue of the same name (info.ServiceName)
+    exchanges:
+      url-shortener:
+        channel: default
+        exclusive: false
+        type: direct
+        durable: true
+        auto-delete: false
+        internal: false
+        no-wait: false
+
+    # TODO: configure prefetch count on the queue
+    queues:
+      url-shortener-worker:
+        channel: default
+        durable: true
+        auto-delete: false
+        exclusive: false
+        no-wait: false
+
+    # ideally, this would be a separate service listening to the queue
+    # but for simplicity, we are publishing and consuming on the same service
+    bindings:
+      - exchange: url-shortener
+        queue: url-shortener-worker
+        no-wait: false
+        routing-keys:
+          - MappingCreated
+          - MappingDeleted
+          - MappingUpdated
+          - MappingExpired

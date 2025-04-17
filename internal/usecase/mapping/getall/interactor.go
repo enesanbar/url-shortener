@@ -13,12 +13,10 @@ import (
 func NewGetMappingsInteractor(
 	logger log.Factory,
 	repo Repository,
-	presenter response.Presenter,
 ) *Interactor {
 	return &Interactor{
-		logger:    logger,
-		repo:      repo,
-		presenter: presenter,
+		logger: logger,
+		repo:   repo,
 	}
 }
 

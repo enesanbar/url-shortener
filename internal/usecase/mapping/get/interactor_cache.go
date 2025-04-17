@@ -15,7 +15,7 @@ import (
 type InteractorCache struct {
 	logger    log.Factory
 	cache     cache.Cache
-	next      Service `name:"cache"`
+	next      Service
 	presenter response.Presenter
 }
 

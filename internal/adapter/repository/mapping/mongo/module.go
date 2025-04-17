@@ -4,7 +4,7 @@ import (
 	"github.com/enesanbar/go-service/persistance/mongodb"
 	"github.com/enesanbar/go-service/wiring"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/create"
-	"github.com/enesanbar/url-shortener/internal/usecase/mapping/delete"
+	"github.com/enesanbar/url-shortener/internal/usecase/mapping/deletion"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/get"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/getall"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/update"
@@ -47,7 +47,7 @@ var bindings = fx.Provide(
 	fx.Annotate(
 		NewMappingMongoAdapter,
 		fx.As(new(create.Repository)),
-		fx.As(new(delete.Repository)),
+		fx.As(new(deletion.Repository)),
 		fx.As(new(get.Repository)),
 		fx.As(new(getall.Repository)),
 		fx.As(new(update.Repository)),

@@ -1,4 +1,4 @@
-package update
+package deletion
 
 import (
 	"go.uber.org/fx"
@@ -11,10 +11,10 @@ var Module = fx.Options(
 var factories = fx.Provide(
 	fx.Annotated{
 		Name:   "interactor",
-		Target: NewUpdateMappingInteractor,
+		Target: NewDeleteMappingInteractor,
 	},
 	fx.Annotated{
 		Name:   "producer",
-		Target: NewUpdateMappingInteractorProducer,
+		Target: NewDeleteMappingInteractorProducer,
 	},
 )

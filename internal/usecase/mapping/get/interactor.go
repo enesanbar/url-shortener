@@ -7,21 +7,18 @@ import (
 
 	"github.com/enesanbar/go-service/errors"
 	"github.com/enesanbar/url-shortener/internal/domain"
-	"github.com/enesanbar/url-shortener/internal/usecase/mapping/response"
 )
 
 type Interactor struct {
-	logger    log.Factory
-	repo      Repository
-	presenter response.Presenter
+	logger log.Factory
+	repo   Repository
 }
 
 // NewGetMappingInteractor creates new Interactor with its dependencies
 func NewGetMappingInteractor(p Params) Service {
 	return &Interactor{
-		logger:    p.Logger,
-		repo:      p.Repo,
-		presenter: p.Presenter,
+		logger: p.Logger,
+		repo:   p.Repo,
 	}
 }
 

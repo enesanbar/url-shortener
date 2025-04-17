@@ -6,31 +6,28 @@ import (
 
 	"github.com/teris-io/shortid"
 
-	"go.uber.org/fx"
-
 	"github.com/enesanbar/go-service/errors"
 	"github.com/enesanbar/go-service/log"
 	"github.com/enesanbar/go-service/validation"
 	"github.com/enesanbar/url-shortener/internal/domain"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/response"
+	"go.uber.org/fx"
 	"go.uber.org/zap"
 )
 
-type Params struct {
+type InteractorParams struct {
 	fx.In
 
 	Logger    log.Factory
 	Repo      Repository
-	Presenter response.Presenter
 	Validator validation.Validator `name:"go_playground"`
 }
 
 // NewCreateMappingInteractor creates new Interactor with its dependencies
-func NewCreateMappingInteractor(p Params) *Interactor {
+func NewCreateMappingInteractor(p InteractorParams) Service {
 	return &Interactor{
 		logger:    p.Logger,
 		repo:      p.Repo,
-		presenter: p.Presenter,
 		validator: p.Validator,
 	}
 }
@@ -40,6 +37,7 @@ type Interactor struct {
 	repo      Repository
 	presenter response.Presenter
 	validator validation.Validator
+	Next      Service `name:"producer"`
 }
 
 // Execute orchestrates the use case
