@@ -1,6 +1,7 @@
 package mappings
 
 import (
+	"github.com/enesanbar/go-service/router"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/create"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/deletion"
 	"github.com/enesanbar/url-shortener/internal/usecase/mapping/getall"
@@ -19,10 +20,7 @@ var factories = fx.Provide(
 	NewGetMappingsAdapter,
 	NewDeleteMappingAdapter,
 	NewUpdateMappingAdapter,
-	fx.Annotate(
-		RegisterRoutes,
-		fx.ResultTags(`group:"routes"`),
-	),
+	router.AsRoute(RegisterRoutes),
 )
 
 var bindings = fx.Provide(

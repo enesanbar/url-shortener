@@ -58,7 +58,7 @@ datasources:
 
     # TODO: configure prefetch count on the queue
     queues:
-      url-shortener-worker:
+      default:
         channel: default
         durable: true
         auto-delete: false
@@ -69,10 +69,10 @@ datasources:
     # but for simplicity, we are publishing and consuming on the same service
     bindings:
       - exchange: url-shortener
-        queue: url-shortener-worker
+        queue: default
         no-wait: false
         routing-keys:
-          - MappingCreated
-          - MappingDeleted
-          - MappingUpdated
-          - MappingExpired
+          - mappingCreated
+          - mappingDeleted
+          - mappingUpdated
+          - mappingExpired

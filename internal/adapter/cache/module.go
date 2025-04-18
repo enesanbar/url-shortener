@@ -7,17 +7,14 @@ import (
 	"go.uber.org/fx"
 )
 
-var Module = fx.Options(
-	factories,
-	bindings,
-)
-
-var factories = fx.Provide(
-	NewConfig,
-	inmemory.NewInMemoryCache,
-	metrics.NewInstrumentor,
-)
-
-var bindings = fx.Provide(
-	func(cache *inmemory.Cache) cache.Cache { return cache },
+var Module = fx.Module(
+	"cache",
+	fx.Provide(
+		NewConfig,
+		metrics.NewInstrumentor,
+		fx.Annotate(
+			inmemory.NewInMemoryCache,
+			fx.As(new(cache.Cache)),
+		),
+	),
 )

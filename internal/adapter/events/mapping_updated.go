@@ -1,8 +1,10 @@
-package consumer
+package events
 
 import (
 	"github.com/enesanbar/go-service/log"
+	"github.com/enesanbar/go-service/messaging/consumer"
 	"github.com/enesanbar/go-service/messaging/messages"
+
 	"go.uber.org/zap"
 )
 
@@ -21,6 +23,9 @@ func (h *MappingUpdatedHandler) Handle(message messages.Message[any]) error {
 	return nil
 }
 
-func (h *MappingUpdatedHandler) Name() string {
-	return "MappingUpdated"
+func (h *MappingUpdatedHandler) Properties() consumer.MessageProperties {
+	return consumer.MessageProperties{
+		QueueName:   "default",
+		MessageName: "mappingUpdated",
+	}
 }

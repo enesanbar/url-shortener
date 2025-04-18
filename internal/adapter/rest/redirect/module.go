@@ -1,6 +1,7 @@
 package redirect
 
 import (
+	"github.com/enesanbar/go-service/router"
 	"go.uber.org/fx"
 )
 
@@ -10,8 +11,5 @@ var Module = fx.Options(
 
 var factories = fx.Provide(
 	New,
-	fx.Annotate(
-		RegisterRoutes,
-		fx.ResultTags(`group:"routes"`),
-	),
+	router.AsRoute(RegisterRoutes),
 )

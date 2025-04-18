@@ -2,7 +2,8 @@ module github.com/enesanbar/url-shortener
 
 go 1.24.2
 
-// replace github.com/enesanbar/go-service => /Users/enesanbar/workspace/go-service
+replace github.com/enesanbar/go-service => /Users/enesanbar/workspace/go-service
+
 // replace github.com/enesanbar/proto-sdk-go => /Users/enesanbar/workspace/proto-sdk-go
 
 require (
@@ -24,7 +25,6 @@ require (
 	github.com/enesanbar/go-service v1.1.0
 	github.com/go-playground/validator/v10 v10.26.0
 	github.com/labstack/echo/v4 v4.13.3
-	github.com/rabbitmq/amqp091-go v1.10.0
 	github.com/testcontainers/testcontainers-go v0.12.0
 	go.mongodb.org/mongo-driver v1.17.3
 	google.golang.org/grpc v1.71.1
@@ -124,6 +124,7 @@ require (
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.63.0 // indirect
 	github.com/prometheus/procfs v0.16.0 // indirect
+	github.com/rabbitmq/amqp091-go v1.10.0 // indirect
 	github.com/sagikazarmark/crypt v0.28.0 // indirect
 	github.com/sagikazarmark/locafero v0.9.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect

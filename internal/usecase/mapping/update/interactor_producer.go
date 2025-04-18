@@ -7,7 +7,7 @@ import (
 	"github.com/enesanbar/go-service/info"
 	"github.com/enesanbar/go-service/log"
 	"github.com/enesanbar/go-service/messaging/messages"
-	"github.com/enesanbar/url-shortener/internal/adapter/messaging/producer"
+	"github.com/enesanbar/go-service/messaging/producer"
 	"github.com/enesanbar/url-shortener/internal/domain"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
@@ -17,7 +17,7 @@ type ProducerParams struct {
 	fx.In
 
 	Logger   log.Factory
-	Producer *producer.Producer
+	Producer *producer.RabbitMQProducer
 	Next     Service `name:"interactor"`
 }
 
@@ -27,13 +27,13 @@ func NewUpdateMappingInteractorProducer(p ProducerParams) Service {
 		logger:      p.Logger,
 		producer:    p.Producer,
 		next:        p.Next,
-		messageName: "MappingUpdated",
+		messageName: "mappingUpdated",
 	}
 }
 
 type InteractorProducer struct {
 	logger      log.Factory
-	producer    *producer.Producer
+	producer    producer.Producer
 	next        Service
 	messageName string
 }
