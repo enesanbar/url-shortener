@@ -9,6 +9,7 @@
             "program": "${workspaceFolder}/cmd/rest/main.go",
             "cwd": "${workspaceFolder}",
             "env": {
+                // "GOWORK": "off",
                 "DEPLOY_TYPE": "prod",
                 "ENV_PREFIX": "MYAPP",
                 "OTEL_EXPORTER": "otlp",

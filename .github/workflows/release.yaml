@@ -20,6 +20,8 @@ jobs:
           go-version: '1.24'
 
       - name: Run tests with coverage
+        env:
+          GOWORK: off
         run: |
           mkdir -p coverage
           go test -v -coverprofile=coverage/coverage.out ./...
@@ -61,3 +63,4 @@ jobs:
           hooks: goreleaser
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GOWORK: off
