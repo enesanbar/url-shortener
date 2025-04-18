@@ -16,8 +16,6 @@ import (
 )
 
 // CreateMappingUseCase is the port to the create mapping use case
-//
-//go:generate mockery --name=CreateMappingUseCase
 type CreateMappingUseCase interface {
 	Execute(context.Context, *create.Request) (*domain.Mapping, error)
 }

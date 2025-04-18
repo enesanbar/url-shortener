@@ -25,7 +25,7 @@ func (h *MappingUpdatedHandler) Handle(message messages.Message[any]) error {
 
 func (h *MappingUpdatedHandler) Properties() consumer.MessageProperties {
 	return consumer.MessageProperties{
-		QueueName:   "default",
+		QueueName:   "url-shortener-worker",
 		MessageName: "mappingUpdated",
 	}
 }

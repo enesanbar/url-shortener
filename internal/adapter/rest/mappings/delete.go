@@ -13,8 +13,6 @@ import (
 )
 
 // DeleteMappingsUseCase is the get interface of the service
-//
-//go:generate mockery -name=DeleteMappingsUseCase
 type DeleteMappingsUseCase interface {
 	Execute(ctx context.Context, code string) error
 }

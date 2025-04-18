@@ -17,8 +17,6 @@ import (
 )
 
 // UpdateMappingUseCase is the port to the update use case
-//
-//go:generate mockery -name=UpdateMappingUseCase
 type UpdateMappingUseCase interface {
 	Execute(context.Context, *update.Request) (*domain.Mapping, error)
 }

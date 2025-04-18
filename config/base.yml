@@ -65,14 +65,34 @@ datasources:
         exclusive: false
         no-wait: false
 
-    # ideally, this would be a separate service listening to the queue
+      url-shortener-worker:
+        channel: default
+        durable: true
+        auto-delete: false
+        exclusive: false
+        no-wait: false
+
+    # ideally, bindings and consume would be on a separate service listening to the queue
     # but for simplicity, we are publishing and consuming on the same service
     bindings:
       - exchange: url-shortener
-        queue: default
+        queue: url-shortener-worker
         no-wait: false
         routing-keys:
           - mappingCreated
           - mappingDeleted
           - mappingUpdated
           - mappingExpired
+
+    consume:
+      url-shortener-worker:
+        channel: default
+        prefetch-count: 1
+        ack-mode: manual
+        no-local: false
+        exclusive: false
+        no-wait: false
+        auto-ack: false
+        requeue-on-error: true
+        retry-count: 3
+        retry-interval: 1000

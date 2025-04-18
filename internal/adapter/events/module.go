@@ -17,12 +17,16 @@ var Module = fx.Module(
 		consumer.AsMessageHandler(NewMappingDeletedEventHandler),
 	),
 
-	// TODO: Fix this. Doesn't work
-	fx.Decorate(func(rabbitmqConsumer *consumer.RabbitMQQueueConsumer) *consumer.RabbitMQQueueConsumer {
-		rabbitmqConsumer.SetChannel("default")
-		rabbitmqConsumer.SetQueue("url-shortener-worker")
-
-		return rabbitmqConsumer
+	// run the consumer
+	// TODO: Later find a way to provide this to FX automatically in go-service
+	fx.Provide(func(p consumer.RabbitMQConsumerParams) (wiring.RunnableGroup, error) {
+		return consumer.RabbitMQConsumerFactory(consumer.RabbitMQConsumersParams{
+			QueueName:       "url-shortener-worker",
+			Queues:          p.Queues,
+			Channels:        p.Channels,
+			Logger:          p.Logger,
+			MessageHandlers: p.MessageHandlers,
+		})
 	}),
 
 	// Register connections as Connection, so that they can recover from failures

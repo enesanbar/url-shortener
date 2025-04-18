@@ -17,8 +17,6 @@ import (
 )
 
 // GetMappingUsecase is the port to the get use case
-//
-//go:generate mockery --name=GetMappingUsecase
 type GetMappingUsecase interface {
 	Execute(ctx context.Context, request get.Request) (*domain.Mapping, error)
 }

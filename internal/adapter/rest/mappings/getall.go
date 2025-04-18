@@ -14,8 +14,6 @@ import (
 )
 
 // GetMappingsUsecase is the port to the getall use case
-//
-//go:generate mockery --name=GetMappingsUsecase
 type GetMappingsUsecase interface {
 	Execute(ctx context.Context, request *getall.Request) (*router.PagedResponse, error)
 }

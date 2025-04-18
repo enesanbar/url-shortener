@@ -23,7 +23,7 @@ func (h *MappingDeletedHandler) Handle(message messages.Message[any]) error {
 
 func (h *MappingDeletedHandler) Properties() consumer.MessageProperties {
 	return consumer.MessageProperties{
-		QueueName:   "default",
+		QueueName:   "url-shortener-worker",
 		MessageName: "mappingDeleted",
 	}
 }
