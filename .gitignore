@@ -50,3 +50,5 @@ linter-report.xml
 **/*.pyc
 **/*.csv
 **/*.xml
+# Added by goreleaser init:
+dist/
